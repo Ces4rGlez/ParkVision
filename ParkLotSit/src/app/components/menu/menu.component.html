@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<!--González Avalos César Fernando-->
+<html lang="en">
+<head>
+  <!--Interfaz dirigida para el visitante, en ella podrá ver la lista de todos sus vehículos(Modelo,Matrícula, etc)-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Vehículos</title>
+ 
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Raleway:500,600&display=swap" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,500,600,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/assets/web/assets/mobirise-icons/mobirise-icons.css">
+    <link rel="stylesheet" href="/assets/tether/tether.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="/assets/socicon/css/styles.css">
+    <link rel="stylesheet" href="/assets/dropdown/css/style.css">
+    <link rel="stylesheet" href="/assets/theme/css/style.css">
+    <link rel="stylesheet" href="/assets/mobirise/css/mbr-additional.css" type="text/css"> 
+
+   
+<script src="https://kit.fontawesome.com/5786258d25.js" crossorigin="anonymous"></script>
+   
+   
+    <style>
+           *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  
+}
+body{
+    margin-left: 80px;
+    margin-top: 80px;
+    transition: margin-left 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+      background-attachment: fixed;
+      background-image: linear-gradient(-45deg, #e3ddd9 50%, #36221c 50%);
+            font-family: 'Gabriola';
+            font-weight: 300;
+            font-size: 15px;
+}
+
+main{
+    padding: 20px;
+}
+
+header{
+    width: 100%;
+    height: 80px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 200;
+}
+
+.icon__menu{
+    width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(10px);
+}
+
+.icon__menu i{
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+}
+
+.menu__side{
+    width: 80px;
+    height: 100%;
+    background: #1783db;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: white;
+    font-size: 18px;
+    z-index: 300;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-right: 20px solid #1783db;
+    transition: all 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+/*Ocultar scroll para chrome, safari y opera*/
+.menu__side::-webkit-scrollbar{
+    display: none;
+}
+
+/*Ocultar scroll para IE, Edge y Firefox*/
+.menu__side{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+
+.name__page{
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.name__page i{
+    width: 20px;
+    margin-right: 20px;
+}
+
+.options__menu{
+    padding: 20px 30px;
+    position: absolute;
+    top: 80px;
+}
+
+.options__menu .menuNo{
+    color: #ffffffb2;
+    cursor: default;
+    display: block;
+    position: relative;
+    transition: color 300ms;
+}
+
+.options__menu .menuNo:hover{
+    color: white;
+}
+
+.options__menu .option{
+    padding: 20px 0px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.options__menu .option i{
+    width: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.options__menu .option .menust{
+    font-weight: 300;
+    cursor: pointer;
+}
+
+a.selected{
+    color: #fff;
+}
+
+.selected:before{
+    content: '';
+    width: 3px;
+    height: 80%;
+    background: white;
+    position: absolute;
+    top: 10%;
+    left: -30px;
+}
+
+/*Clases para usar en JavaScript*/
+
+.body_move{
+    margin-left: 250px;
+}
+
+.menu__side_move{
+    width: 250px;
+}
+
+
+@media screen and (max-width: 760px){
+    .body_move{
+        margin-left: 0px;
+    }
+
+    .menu__side_move{
+        width: 80px;
+        left: -80px;
+    }
+}
+
+.search {
+  --background: #ffffff;
+  --text-color: #414856;
+  --primary-color: #4F29F0;
+  --border-radius: 10px;
+  --width: 190px;
+  --height: 55px;
+  background: var(--background);
+  width: auto;
+  height: var(--height);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search input[type=text] {
+  position: relative;
+  width: var(--height);
+  height: var(--height);
+  font: 400 16px "Varela Round", sans-serif;
+  color: var(--text-color);
+  border: 0;
+  box-sizing: border-box;
+  outline: none;
+  padding: 0 0 0 40px;
+  transition: width 0.6s ease;
+  z-index: 10;
+  opacity: 0;
+  cursor: pointer;
+}
+.search input[type=text]:focus {
+  z-index: 0;
+  opacity: 1;
+  width: var(--width);
+}
+.search input[type=text]:focus ~ .symbol::before {
+  width: 0%;
+}
+.search input[type=text]:focus ~ .symbol:after {
+  -webkit-clip-path: inset(0% 0% 0% 100%);
+          clip-path: inset(0% 0% 0% 100%);
+  transition: -webkit-clip-path 0.04s linear 0.105s;
+  transition: clip-path 0.04s linear 0.105s;
+  transition: clip-path 0.04s linear 0.105s, -webkit-clip-path 0.04s linear 0.105s;
+}
+.search input[type=text]:focus ~ .symbol .cloud {
+  top: -30px;
+  left: -30px;
+  transform: translate(0, 0);
+  transition: all 0.6s ease;
+}
+.search input[type=text]:focus ~ .symbol .lens {
+  top: 20px;
+  left: 15px;
+  transform: translate(0, 0);
+  fill: var(--primary-color);
+  transition: top 0.5s ease 0.1s, left 0.5s ease 0.1s, fill 0.3s ease;
+}
+.search .symbol {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search .symbol:before {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-color);
+  z-index: -1;
+  transition: width 0.6s ease;
+}
+.search .symbol:after {
+  content: "";
+  position: absolute;
+  top: 21px;
+  left: 21px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  z-index: 1;
+  -webkit-clip-path: inset(0% 0% 0% 0%);
+          clip-path: inset(0% 0% 0% 0%);
+  transition: -webkit-clip-path 0.04s linear 0.225s;
+  transition: clip-path 0.04s linear 0.225s;
+  transition: clip-path 0.04s linear 0.225s, -webkit-clip-path 0.04s linear 0.225s;
+}
+.search .symbol .cloud,
+.search .symbol .lens {
+  position: absolute;
+  fill: #fff;
+  stroke: none;
+  top: 50%;
+  left: 50%;
+}
+.search .symbol .cloud {
+  width: 35px;
+  height: 32px;
+  transform: translate(-50%, -60%);
+  transition: all 0.6s ease;
+}
+.search .symbol .lens {
+  fill: #fff;
+  width: 16px;
+  height: 16px;
+  z-index: 2;
+  top: 24px;
+  left: 24px;
+  transition: top 0.3s ease, left 0.3s ease, fill 0.2s ease 0.2s;
+}
+.red{
+  font-family: Quicky Story;
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  border-radius: 10px;
+  position:relative;
+  left: 950px;
+  height:60px;
+  font-size:16px;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.red:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.red:before,.red:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+.red:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.red:hover:before,.red:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
+html {
+            position: relative;
+            min-height: 100%;
+        }
+
+       
+        h1, h2, h3 {
+            font-weight: 200;
+        }
+        .fa-spin-fast {
+  -webkit-animation: fa-spin-fast 0.2s infinite linear;
+  animation: fa-spin-fast 0.2s infinite linear;
+}
+@import "https://fonts.googleapis.com/css?family=Raleway:400,300,200,500,600,700";
+.fa-spin-fast {
+  -webkit-animation: fa-spin-fast 0.2s infinite linear;
+  animation: fa-spin-fast 0.2s infinite linear;
+}
+@-webkit-keyframes fa-spin-fast {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes fa-spin-fast {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+  .band {
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+
+  @media (min-width: 30em) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 60em) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.cartasNo{
+  background: white;
+  text-decoration: none;
+  color: #444;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  position: relative;
+  top: 0;
+  transition: all 0.1s ease-in;
+
+  &:hover {
+    top: -2px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .noticias {
+    padding: 20px;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .cartasTit {
+    font-size: 20px;
+    margin: 0;
+    color: #333;
+  }
+
+  .parrafoCarta {
+    flex: 1;
+    line-height: 1.4;
+  }
+
+  .autorNot {
+    font-size: 12px;
+    font-weight: bold;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2em 0 0 0;
+  }
+
+  .thumb {
+    padding-bottom: 60%;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+.item-1 {
+  @media (min-width: 60em) {
+    grid-column: 1 / span 2;
+
+    .cartasTit {
+      font-size: 24px;
+    }
+  }
+}
+.seccion-title {
+    font-family: Impact;
+    font-size: 30px; /* Tamaño de la fuente */
+    font-weight: bold; /* Negrita */
+    color: #ffffff; /* Color del texto */
+    display: flex;
+    align-items: center; /* Alineación vertical centrada */
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+.title-barra {
+    content: "";
+    display: inline-block;
+    width: 5px; /* Ancho de la barra */
+    height: 50px; /* Altura de la barra */
+    background-color: #D0E1F9; /* Color de la barra */
+    margin-right: 10px; /* Espacio entre la barra y el texto */
+    border-radius: 2px; /* Borde redondeado */
+}
+
+</style>
+</head>
+
+<body id="body">
+    <header>
+       <div class="icon__menu">
+           <i class="fas fa-bars" id="btn_open"></i>
+       </div>
+   
+  <div class="contenido">
+    <div class="search">
+  <input type="text" placeholder="search" />
+  <div class="symbol">
+    <svg class="cloud">
+      <use xlink:href="#cloud" />
+    </svg>
+    <svg class="lens">
+      <use xlink:href="#lens" />
+    </svg>
+  </div>
+</div>
+  
+<!-- SVG -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" id="cloud">
+    <path d="M31.714,25.543c3.335-2.17,4.27-6.612,2.084-9.922c-1.247-1.884-3.31-3.077-5.575-3.223h-0.021
+  C27.148,6.68,21.624,2.89,15.862,3.931c-3.308,0.597-6.134,2.715-7.618,5.708c-4.763,0.2-8.46,4.194-8.257,8.919
+  c0.202,4.726,4.227,8.392,8.991,8.192h4.873h13.934C27.784,26.751,30.252,26.54,31.714,25.543z" />
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="lens">
+    <path d="M15.656,13.692l-3.257-3.229c2.087-3.079,1.261-7.252-1.845-9.321c-3.106-2.068-7.315-1.25-9.402,1.83
+  s-1.261,7.252,1.845,9.32c1.123,0.748,2.446,1.146,3.799,1.142c1.273-0.016,2.515-0.39,3.583-1.076l3.257,3.229
+  c0.531,0.541,1.404,0.553,1.95,0.025c0.009-0.008,0.018-0.017,0.026-0.025C16.112,15.059,16.131,14.242,15.656,13.692z M2.845,6.631
+  c0.023-2.188,1.832-3.942,4.039-3.918c2.206,0.024,3.976,1.816,3.951,4.004c-0.023,2.171-1.805,3.918-3.995,3.918
+  C4.622,10.623,2.833,8.831,2.845,6.631L2.845,6.631z" />
+  </symbol>
+</svg>  
+</div>
+<button class="red" (click)="goToHome()">Iniciar Sesión</button>
+</header>
+<section class="MenuNov">
+<div>
+<div class="menu__side" id="menu_side">
+
+<div class="name__page">
+  <i class="fab fa-youtube"></i>
+  <h4 class="menust">Desarrollo UTNG</h4>
+</div>
+
+<div class="options__menu">	
+
+  <a href="/menu" class="selected">
+      <div class="option">
+          <i class="fas fa-home" title="Inicio"></i>
+          <h4 class="menust">Inicio</h4>
+      </div>
+  </a>
+
+  <a routerLink="/perfil/perfil" class="menuNo">
+      <div class="option">
+          <i class="far fa-file" title="Mi Perfil"></i>
+          <h4 class="menust">Mi Perfil</h4>
+      </div>
+  </a>
+  
+  <a href="/solic" class="menuNo">
+      <div class="option">
+          <i class="fas fa-video" title="Solicitudes"></i>
+          <h4 class="menust">Solicitudes</h4>
+      </div>
+  </a>
+
+  <a routerLink="/sitio" class="menuNo">
+      <div class="option">
+          <i class="far fa-sticky-note" title="Acerca De"></i>
+          <h4 class="menust">Acerca De</h4>
+      </div>
+  </a>
+
+  <a routerLink="/contact" class="menuNo">
+      <div class="option">
+          <i class="far fa-id-badge" title="Contacto"></i>
+          <h4 class="menust">Contacto</h4>
+      </div>
+  </a>
+
+  <a routerLink="/notif" class="menuNo">
+      <div class="option">
+          <i class="far fa-address-card" title="Notificaciones"></i>
+          <h4 class="menust">Notificaciones</h4>
+      </div>
+  </a>
+
+  <a routerLink="/pagad" class="menuNo">
+    <div class="option">
+      <i class="fa-solid fa-gears" title="Administrador"></i>
+        <h4 class="menust">Administrador</h4>
+    </div>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<main>
+<section class="cid-s7IyAyrQBr mbr-fullscreen mbr-parallax-background" id="header2-1">
+
+    
+
+  <div class="mbr-overlay" style="opacity: 0.2; background-color: rgb(35, 35, 35);"></div>
+
+  <div class="container align-center">
+      <div class="row justify-content-md-center">
+          <div class="mbr-white col-md-10">
+              <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-2" style="font-family: Snap ITC; font-size: 70px; ">
+                ParkVision</h1>
+              
+              
+              <div class="mbr-section-btn"><a class="btn btn-md btn-primary display-4" href="">Control</a>
+                  <a class="btn btn-md btn-danger display-4" href="">Estacionamiento</a> <a class="btn btn-md btn-secondary display-4" href="">Digital</a></div>
+          </div>
+      </div>
+  </div>
+  <div class="mbr-arrow hidden-sm-down" aria-hidden="true">
+      <a href="#next">
+          <i class="mbri-down mbr-iconfont"></i>
+      </a>
+  </div>
+</section>
+
+<section class="counters1 counters cid-s7IDltMZfV" id="counters1-3">
+
+  
+
+  
+
+  <div class="container">
+      <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">
+          Control de Estacionamiento Digital</h2>
+      <h3 class="mbr-section-subtitle mbr-fonts-style display-5">
+          Beneficios de ParkVision</h3>
+
+      <div class="container pt-4 mt-2">
+          <div class="media-container-row">
+              <div class="card p-3 align-center col-12 col-md-6 col-lg-4">
+                  <div class="panel-item p-3">
+                      <div class="card-img pb-3">
+                          <span class="mbr-iconfont mbri-wifi" style="color: rgb(239, 108, 62); fill: rgb(239, 108, 62); font-size: 60px;"></span>
+                      </div>
+
+                      <div class="card-text">
+                          <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
+                                Fácil Acceso</h3>
+                          <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">
+                               Accesibilidad</h4>
+                          <p class="mbr-content-text mbr-fonts-style display-7">
+                            Disfruta de una experiencia sencilla y rápida con nuestro sistema de fácil acceso. Hemos diseñado nuestra plataforma para que puedas ingresar y navegar sin complicaciones:</p>
+                      </div>
+                  </div>
+              </div>
+
+
+              <div class="card p-3 align-center col-12 col-md-6 col-lg-4">
+                  <div class="panel-item p-3">
+                      <div class="card-img pb-3">
+                          <span class="mbr-iconfont mbri-photos" style="color: rgb(45, 169, 108); fill: rgb(45, 169, 108); font-size: 60px;"></span>
+                      </div>
+                      <div class="card-text">
+                          <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
+                                Seguridad</h3>
+                          <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">
+                             Seguro y Eficaz</h4>
+                          <p class="mbr-content-text mbr-fonts-style display-7">
+                            Tu seguridad es nuestra máxima prioridad. Hemos implementado las más avanzadas medidas para proteger tu información y garantizar una experiencia segura
+                          </p>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="card p-3 align-center col-12 col-md-6 col-lg-4">
+                  <div class="panel-item p-3">
+                      <div class="card-img pb-3">
+                          <span class="mbr-iconfont mbri-gift" style="color: rgb(85, 180, 212); fill: rgb(85, 180, 212); font-size: 60px;"></span>
+                      </div>
+                      <div class="card-text">
+                          <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
+                                Servicios Extras</h3>
+                          <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">
+                              Lavado Gratuito</h4>
+                          <p class="mbr-content-text mbr-fonts-style display-7">
+                            ¡Disfruta de la comodidad de nuestro servicio de lavado gratuito! Nos aseguramos de que tu vehículo siempre esté limpio y reluciente, sin costo adicional:
+                          </p>
+                      </div>
+                  </div>
+              </div>
+
+
+              
+          </div>
+      </div>
+ </div>
+</section>
+<br><br>
+<section class="features3 cid-s7K0MDoXOR mbr-parallax-background" id="features3-4">
+
+  
+
+  <div class="mbr-overlay" style="opacity: 0.4; background-color: rgb(85, 180, 212);">
+  </div>
+  <div class="container">
+     <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2" style="font-family: Dancing Script; ">
+          Servicios de ParkVision</h2>
+      
+      <div class="media-container-row">
+          <div class="card p-3 col-12 col-md-6 col-lg-4">
+              <div class="card-wrapper">
+                  <div class="card-img">
+                      <img src="assets/imagessit/mox.jpeg" alt="Mobirise" title="">
+                  </div>
+                  <div class="card-box">
+                      <h4 class="card-title mbr-fonts-style display-7" style="font-family: Impact; color: darkcyan; ">Solicitar Espacio</h4>
+                      <p class="mbr-text mbr-fonts-style display-7">
+                        Asegure su espacio de estacionamiento con antelación.Reserve fácilmente a través de nuestra plataforma y garantice un lugar disponible para su vehículo cuando lo necesite.
+                      </p>
+                  </div>
+                  <div class="mbr-section-btn text-center">
+                      <a routerLink="/solic" class="btn btn-primary display-4">
+                        Ir...
+                      </a>
+                  </div>
+              </div>
+          </div>
+<br>
+          <div class="card p-3 col-12 col-md-6 col-lg-4">
+              <div class="card-wrapper">
+                  <div class="card-img">
+                      <img src="assets/imagessit/pe.jpg" alt="Mobirise" title="">
+                  </div>
+                  <div class="card-box">
+                      <h4 class="card-title mbr-fonts-style display-7" style="font-family: Impact; color: darkblue; ">
+                          Iniciar Sesión</h4>
+                      <p class="mbr-text mbr-fonts-style display-7">
+                          Inicie sesión fácilmente, creando una cuenta en ParkVision.
+                          Crear una cuenta es rápido y fácil. Al registrarte, podrás acceder a todas las funcionalidades y beneficios de nuestra plataforma. 
+                      </p>
+                  </div>
+                  <div class="mbr-section-btn text-center">
+                      <a href="" class="btn btn-primary display-4">
+                          Ir...
+                      </a>
+                  </div>
+              </div>
+          </div>
+
+          <div class="card p-3 col-12 col-md-6 col-lg-4">
+              <div class="card-wrapper">
+                  <div class="card-img">
+                      <img src="assets/imagessit/cot.png" alt="Mobirise" title="">
+                  </div>
+                  <div class="card-box">
+                      <h4 class="card-title mbr-fonts-style display-7" style="font-family: Impact; color: red; ">
+                          Contacto con Soporte</h4>
+                      <p class="mbr-text mbr-fonts-style display-7">
+                         
+                          Si tienes alguna pregunta, problema, o necesitas asistencia personalizada, estamos aquí para ayudarte.
+                      </p>
+                  </div>
+                  <div class="mbr-section-btn text-center">
+                      <a routerLink="/contact" class="btn btn-primary display-4">
+                          Ir...
+                      </a>
+                  </div>
+              </div>
+          </div>
+
+          
+      </div>
+  </div>
+</section>
+<br><br>
+<section class="mbr-section article content9 cid-s7K5bkWzLu" id="content9-9">
+  
+   
+
+  <div class="container">
+      <div class="inner-container" style="width: 100%;">
+          <hr class="line" style="width: 25%;">
+          <div class="section-text align-center mbr-fonts-style display-5">"Donde la seguridad y la comodidad se encuentran: Reserva con confianza, sabiendo que tu vehículo está en las mejores manos."</div>
+          <hr class="line" style="width: 25%;">
+      </div>
+      </div>
+</section>
+
+  
+
+<section class="mbr-section" id="witsec-custom-html-block-g" data-rv-view="445" style="background-color: rgb(255, 255, 255);">
+
+<div class="witsec-custom-html-container elements-content" style="padding-top: 3rem; padding-bottom: 2rem;">
+   
+  <div class="mbr-section__container block" style="width: 100%;"></div>
+</div>
+
+
+</section>
+
+<br><br>
+<h2 class="seccion-title"><span class="title-barra"></span>Últimas Noticias</h2>
+
+<br><br>
+<div class="band">
+  <div class="item-1">
+    <a href="https://design.tutsplus.com/articles/international-artist-feature-malaysia--cms-26852" class="cartasNo">
+      <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-1.jpg);"></div>
+      <article class="noticias">
+        <h1 class="cartasTit">Artista Internacional Destacado: Malasia</h1>
+        <span class="autorNot">César González</span>
+      </article>
+    </a>
+  </div>
+  <div class="item-2">
+    <a href="https://webdesign.tutsplus.com/articles/how-to-conduct-remote-usability-testing--cms-27045" class="cartasNo">
+      <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/users-2.png);"></div>
+      <article class="noticias">
+        <h1 class="cartasTit">Cómo Realizar Pruebas de Usabilidad Remotas</h1>
+        <span class="autorNot">Correa Gilberto</span>
+      </article>
+    </a>
+  </div>
+  <div class="item-3">
+    <a href="https://design.tutsplus.com/articles/envato-tuts-community-challenge-created-by-you-july-edition--cms-26724" class="cartasNo">
+      <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-5.jpg);"></div>
+      <article class="noticias">
+        <h1 class="cartasTit">Creado por Ti, Edición de Julio</h1>
+        <p class="parrafoCarta">¡Bienvenido a nuestra función mensual de resultados fantásticos de tutoriales creados por ti, la comunidad de Envato Tuts+!</p>
+        <span class="autorNot">Arredondo Emmanuel</span>
+      </article>
+    </a>
+  </div>
+  <div class="item-4">
+    <a href="https://webdesign.tutsplus.com/tutorials/how-to-code-a-scrolling-alien-lander-website--cms-26826" class="cartasNo">
+      <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/landing.png);"></div>
+      <article class="noticias">
+        <h1 class="cartasTit">Cómo Programar un Sitio Web Desplazable de “Estacionamiento”</h1>
+        <p class="parrafoCarta">Uniremos todo para que, al desplazarte hacia abajo desde la parte superior de la página, veas un “Alien Lander” aterrizando.</p>
+        <span class="autorNot">César González</span>
+      </article>
+    </a>
+  </div>
+  <div class="item-5">
+    <a href="https://design.tutsplus.com/tutorials/stranger-things-inspired-text-effect--cms-27139" class="cartasNo">
+      <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/strange.jpg);"></div>
+      <article class="noticias">
+        <h1 class="cartasTit">Cómo Crear un Efecto de Texto Inspirado en “Stranger Things” en Adobe Photoshop</h1>
+        <span class="autorNot">Correa Gilberto</span>
+      </article>
+    </a>
+  </div>
+  <div class="item-6">
+    <a href="https://photography.tutsplus.com/articles/5-inspirational-business-portraits-and-how-to-make-your-own--cms-27338" class="cartasNo">
+      <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flor.jpg);"></div>
+      <article class="noticias">
+        <h1 class="cartasTit">5 Retratos Empresariales Inspiradores y Cómo Hacer el Tuyo Propio</h1>
+        <span class="autorNot">Arredondo Emmanuel</span>
+      </article>
+    </a>
+  </div>
+  <div class="item-7">
+    <a href="https://webdesign.tutsplus.com/articles/notes-from-behind-the-firewall-the-state-of-web-design-in-china--cms-22281" class="cartasNo">
+      <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/china.png);"></div>
+      <article class="noticias">
+        <h1 class="cartasTit">Notas Desde Detrás del Cortafuegos: El Estado del Diseño Web en China</h1>
+        <span class="autorNot">César González</span>
+      </article>
+    </a>
+  </div>
+</div>
+<br>
+<br>
+
+
+
+<section class="cid-s7K4Tp8Ka4" id="footer1-8">
+
+  
+
+  
+
+  <div class="container">
+      <div class="media-container-row content text-white">
+          <div class="col-12 col-md-3">
+              <div class="media-wrap">
+                <span class="mbr-iconfont fas fa-code" style="color: rgb(45, 169, 108); font-size: 60px;"></span>
+
+              </div>
+          </div>
+          <div class="col-12 col-md-3 mbr-fonts-style display-7">
+              <h5 class="pb-3">
+                  Desarrolladores UTNG
+              </h5>
+              <p class="mbr-text">
+                  González César 
+                  <br>Arredondo Emmanuel
+                  <br>Correa Gilberto
+                  <br>Dolores Hidalgo C.I.N</p>
+          </div>
+          <div class="col-12 col-md-3 mbr-fonts-style display-7">
+              <h5 class="pb-3">
+                  Contacto
+              </h5>
+              <p class="mbr-text">
+                  Email: ces4rglez17gmail.com
+                  <br>Teléfono: +52 418 111 1111
+                  <br>Teléfono 2 : +52 418 111 1111
+              </p>
+          </div>
+          <div class="col-12 col-md-3 mbr-fonts-style display-7">
+              <h5 class="pb-3">
+                  Estacionamiento</h5>
+              <p class="mbr-text"><a href="">ParkVision&nbsp;</a><br><a class="text-primary" href="">Digital&nbsp;</a><br><a class="text-primary" href="">Estacionamiento</a></p>
+          </div>
+      </div>
+      <div class="footer-lower">
+          <div class="media-container-row">
+              <div class="col-sm-12">
+                  <hr>
+              </div>
+          </div>
+          <div class="media-container-row mbr-white">
+              <div class="col-sm-6 copyright">
+                  <p class="mbr-text mbr-fonts-style display-7">© Copyright 2024</p><p></p><p></p>
+              </div>
+              <div class="col-md-6">
+                  <div class="social-list align-right">
+                      <div class="soc-item">
+                          <a href="" target="_blank">
+                              <span class="mbr-iconfont mbr-iconfont-social socicon-twitter socicon"></span>
+                          </a>
+                      </div>
+                      <div class="soc-item">
+                          <a href="" target="_blank">
+                              <span class="mbr-iconfont mbr-iconfont-social socicon-facebook socicon"></span>
+                          </a>
+                      </div>
+                      <div class="soc-item">
+                          <a href="" target="_blank">
+                              <span class="mbr-iconfont mbr-iconfont-social socicon-pinterest socicon"></span>
+                          </a>
+                      </div>
+                      
+                      
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+<script src="/assets/web/assets/jquery/jquery.min.js"></script>
+<script src="/assets/popper/popper.min.js"></script>
+<script src="/assets/tether/tether.min.js"></script>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/smoothscroll/smooth-scroll.js"></script>
+<script src="/assets/parallax/jarallax.min.js"></script>
+<script src="/assets/countdown/jquery.countdown.min.js"></script>
+<script src="/assets/bootstrapcarouselswipe/bootstrap-carousel-swipe.js"></script>
+<script src="/assets/mbr-testimonials-slider/mbr-testimonials-slider.js"></script>
+<script src="/assets/dropdown/js/nav-dropdown.js"></script>
+<script src="/assets/dropdown/js/navbar-dropdown.js"></script>
+<script src="/assets/touchswipe/jquery.touch-swipe.min.js"></script>
+<script src="/assets/viewportchecker/jquery.viewportchecker.js"></script>
+<script src="/assets/theme/js/script.js"></script>
+</main></body></html>
